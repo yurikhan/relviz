@@ -1,0 +1,479 @@
+# UML 1.5 Core
+
+## Fig. 2-5. Core Package – Backbone
+
+element-type element
+    # customization point for all elements
+element-type model-element is-an element # YAGNI?
+
+cluster-type namespace is-a model-element # YAGNI?
+
+containment element-ownership
+    style: solid
+    arrowhead: dot # substitute for cross-in-a-circle
+containment in, belongs-to, nested-in is element-ownership
+
+node-type generalizable-element is-a model-element # YAGNI?
+
+node-type classifier is-a namespace, generalizable-element
+    shape: box
+
+node-type metaclass is-a classifier
+    label: """«metaclass»
+\\N"""
+node-type powertype is-a classifier
+    label: """«powertype»
+\\N"""
+node-type process is-a classifier
+    label: """«process»
+\\N"""
+node-type thread is-a classifier
+    label: """«thread»
+\\N"""
+node-type utility is-a classifier
+    label: """«utility»
+\\N"""
+
+
+element-type feature, parameter, constraint are model-element
+element-type structural-feature, behavioral-feature are feature
+element-type attribute is-a structural-feature
+element-type operation, method are behavioral-feature
+
+
+## Fig. 2-6. Core Package – Relationships
+
+edge-type relationship is-a model-element
+
+edge-type flow is-a relationship
+    # TODO presentation
+edge-type becomes is-a flow
+    label: «become»
+edge-type copy is-a flow
+    label: «copy»
+
+edge-type generalization is-a relationship
+    style: solid
+    arrowhead: empty
+edge-type is-a generalization generalization
+edge-type are is-a generalization
+edge-type is, is-an, generalizes, subclasses are generalization
+
+edge-type association is-a relationship, generalizable-element
+    style: solid
+    arrowhead: open
+edge-type associated-with, knows, knows-a, knows-an is-an association
+
+edge-type aggregation is-an association
+    arrowtail: odiamond
+edge-type has, has-a, has-an, have, have-a, have-an is-an aggregation
+
+edge-type composition is-an aggregation
+    arrowtail: diamond
+edge-type owns, owns-a, owns-an, own, own-a, own-an
+
+node-type class is-a classifier
+node-type type is-a class
+    label: """«type»
+\\N"""
+node-type implementation-class is-a class
+    label: """«implementationClass»
+\\N"""
+
+node-type association-class is-a class, association
+
+edge-type association-class-for
+    style: dashed
+    arrowhead: none
+
+node-type nary-association is-an association
+    shape: diamond
+
+edge-type participates-in is-an association
+    style: solid
+    arrowhead: none
+
+
+element-type association-end is-a model-element
+
+
+## Fig. 2-7. Core Package – Dependencies
+
+edge-type dependency is-a relationship
+    style: dashed
+    arrowhead: open
+edge-type depends-on is-a dependency
+
+
+edge-type binding is-a dependency
+edge-type binds is-a binding
+
+
+edge-type abstraction is-a dependency
+edge-type abstracts is-an abstraction
+
+edge-type derivation is-an abstraction
+    label: «derive»
+edge-type derives-from is-a derivation
+
+edge-type realization is-an abstraction
+    arrowhead: empty
+edge-type realizes is-a realization
+edge-type implements is-a realization
+    style: solid
+    arrowhead: none
+
+edge-type refinement is-an abstraction
+    label: «refine»
+edge-type refines is-a refinement
+
+edge-type trace is-an abstraction
+    label: «trace»
+edge-type traces is-a trace
+
+
+edge-type usage is-a dependency
+    label: «use»
+edge-type uses is-a usage
+
+edge-type call is-a usage
+    label: «call»
+edge-type calls is-a call
+
+edge-type create is-a usage
+    label: «create»
+edge-type creates is-a create
+
+edge-type instantiate is-a usage
+    label: «instantiate»
+edge-type instantiates is-an instantiate
+
+edge-type send is-a usage
+    label: «send»
+edge-type sends is-a send
+
+
+edge-type permission is-a dependency
+edge-type permits, grants-permission is-a permission
+
+edge-type access is-a permission
+    label: «access»
+edge-type accesses is-an access
+
+edge-type friendship is-a permission
+edge-type friend-of is friendship
+friendship is magic
+
+edge-type import is-a permission
+    label: «import»
+edge-type imports is-an import
+
+
+edge-type instance-of is-a dependency
+    label: «instanceOf»
+
+
+## Fig. 2-8. Core Package – Classifiers
+
+# class, see Fig. 2-6
+
+node-type interface is-a classifier
+
+node-type iface is-an interface
+    shape: circle
+    height: 0.1
+    label: ""
+    xlabel: \N
+
+node-type data-type is-a classifier
+
+node-type enumeration is-a data-type
+    label: """«enumeration»
+\\N"""
+
+node-type node is-a classifier
+    shape: box3d
+
+node-type component is-a classifier
+    shape: component
+
+node-type artifact is-a classifier
+    shape: note
+
+node-type document is-a file
+    label: """«document»
+\\N"""
+node-type executable is-a file
+    label: """«executable»
+\\N"""
+node-type file is-an artifact
+    label: """«file»
+\\N"""
+node-type library is-a file
+    label: """«library»
+\\N"""
+node-type source is-a file
+    label: """«source»
+\\N"""
+node-type table is-an artifact
+    label: """«table»
+\\N"""
+    # TODO shape
+
+containment element-residence is-a model-element
+    style: dashed
+    arrowhead: open
+containment resides-in, reside-in, resides-on, reside-on are element-residence
+    label: «reside»
+containment deployed-on is-an element-residence
+    label: «deploy»
+
+node-type primitive, programming-language-data-type are data-type
+element-type enumeration-literal is-a model-element
+
+
+## Fig. 2-9. Core Package – Auxiliary elements
+
+element-type template-parameter, template-argument, comment are model-element
+element-type presentation-element is-an element
+
+
+### Not modeled here:
+## Fig. 2-10. Extension Mechanisms
+## Fig. 2-11. Data Types Package – Main
+## Fig. 2-12. Data Types Package – Expressions
+## Fig. 2-13. Behavioral Elements Package
+## Fig. 2-14. Common Behavior – Signals
+## Fig. 2-15. Common Behavior – Procedure
+
+## Fig. 2-16. Common Behavior – Instances
+
+node-type instance is-a model-element
+    shape: box
+node-type data-value is-an instance
+node-type subsystem-instance is-an instance
+node-type component-instance is-an instance
+    shape: component
+node-type node-instance is-an instance
+    shape: box3d
+node-type object is-an instance
+
+element-type stimulus, procedure are model-element
+
+## Fig. 2-17. Common Behavior – Links
+
+edge-type link is-a model-element
+    style: solid
+    arrowhead: open
+node-type nary-link is-a link
+    shape: diamond
+    label: ""
+edge-type link-object is-an object, link
+
+element-type attribute-link, link-end are model-element
+
+### Not modeled here:
+## Fig. 2-18. Collaborations – Roles
+## Fig. 2-19. Collaborations – Interactions
+## Fig. 2-20. Collaborations – Instances
+
+## Fig. 2-21. Use Cases
+
+node-type actor is-a classifier
+    # shape: not supported by Graphviz
+    label: """«actor»
+\\N"""
+
+node-type use-case is-a classifier
+    shape: ellipse
+
+node-type use-case-instance is-an instance
+    shape: ellipse
+
+edge-type has-use-case is-an association
+    arrowhead: none
+
+edge-type include is-a relationship
+    label: «include»
+    style: dashed
+    arrowhead: open
+edge-type includes is-an include
+
+edge-type extend is-a relationship
+    label: «extend»
+    style: dashed
+    arrowhead: open
+edge-type extends is-an extend
+
+element-type extension-point is-a model-element
+
+
+## Fig. 2-24 State Machines – Main
+
+cluster-type state-machine is-a model-element
+
+node-type state-vertex is-a model-element
+
+edge-type transition is-a model-element
+    style: solid
+    arrowhead: open
+
+node-type pseudo-state is-a state-vertex
+
+node-type initial-state is-a pseudo-state
+    shape: circle
+    fillcolor: black
+    label: ""
+    xlabel: \N
+
+node-type deep-history is-a pseudo-state
+    shape: circle
+    label: H*
+
+node-type shallow-history is-a pseudo-state
+    shape: circle
+    label: H
+
+node-type join, fork are pseudo-state
+    shape: box
+    height: 0.1
+    fillcolor: black
+    label: ""
+    xlabel: \N
+
+node-type junction is-a pseudo-state
+    shape: circle
+    height: 0.1
+    fillcolor: black
+    label: ""
+    xlabel: \N
+node-type decision, merge is-a junction
+    shape: diamond
+
+node-type choice is-a pseudo-state
+    shape: circle
+    height: 0.1
+    label: ""
+    xlabel: \N
+
+node-type synch-state is-a state-vertex
+    shape: circle
+    height: 0.1
+
+node-type stub-state is-a state-vertex
+    shape: box
+    height: 0
+    fillcolor: black
+    label: ""
+    xlabel: \N
+
+node-type state is-a state-vertex
+    shape: box
+    style: rounded
+
+cluster-type composite-state is-a state
+
+cluster-type submachine-state is-a composite-state
+
+node-type simple-state is-a state
+
+node-type final-state is-a state
+    shape: doublecircle
+    fillcolor: black
+    height: 0.1
+    label: ""
+    xlabel: \N
+
+element-type guard is-a model-element
+
+
+## Not modeled here:
+## Fig. 2-25. State Machines – Events
+
+
+## Fig. 2-30. Activity Graphs
+
+cluster-type activity-graph is-a state-machine
+
+cluster-type partition is-a model-element
+
+node-type subactivity-state is-a submachine-state
+
+node-type action-state is-a simple-state
+    # shape: not supported by Graphviz
+
+node-type call-state is-an action-state
+
+node-type object-flow-state is-a simple-state
+    shape: box
+
+node-type signal-flow is-an object-flow-state
+    label: """«signal-flow»
+\\N"""
+
+node-type classifier-in-state is-a classifier
+
+
+## Fig. 2-32. Model Management
+
+cluster-type package is-a namespace
+    shape: tab
+
+cluster-type facade is-a package
+    label: """«facade»
+\\G"""
+
+cluster-type framework is-a package
+    label: """«frameword»
+\\G"""
+
+cluster-type model-library is-a package
+    label: """«modelLibrary»
+\\G"""
+
+cluster-type profile is-a package
+    label: """«profile»
+\\G"""
+
+cluster-type stub is-a package
+    label: """«stub»
+\\G"""
+
+cluster-type top-level is-a package
+    label: """«topLevel»
+\\G"""
+
+cluster-type subsystem is-a classifier, package
+    label: """«subsystem»
+\\G"""
+
+cluster-type model is-a package
+    label: """«model»
+\\G"""
+
+cluster-type system-model is-a model
+    label: «systemModel»
+
+cluster-type metamodel is-a model
+    label: «metamodel»
+
+edge-type uses-model-library is-a dependency
+    label: «modelLibrary»
+
+edge-type applied-profile is-a dependency
+    label: «appliedProfile»
+
+element-type element-import is-a model-element
+
+
+## Not modeled here:
+## § 2.5 Actions
+
+
+# § 3.11 Note
+
+node-type note
+    shape: note
+
+edge-type is-attached-to
+    style: dashed
