@@ -1,0 +1,35 @@
+* { box-sizing: border-box }
+
+body { padding: 0.25em }
+html, body { margin: 0; }
+html, form { width: 100%; height: 100%; }
+body.vertical { width: 100%; }
+body.horizontal { height: 100%; }
+
+#main { width: 100%; height: calc(100% - 3em); }
+
+.vertical textarea { width: 100%; height: 50vh; resize: vertical; }
+.vertical #output { width: 100%; }
+
+.horizontal textarea { float: left; height: 100%; width: 50vw; resize: none; }
+.horizontal #output { margin-left: calc(50vw + 1em); height: 100%; }
+
+textarea { margin: 0; }
+
+#output pre { margin: 0; }
+
+input[type=radio] { margin: 0; }
+label + input[type=radio], input[type=radio] + label { margin-left: 0.25em; }
+button + label, label + label { margin-left: 1em; }
+
+#output svg { cursor: zoom-out; }
+.zoom-out #output svg { width: unset; height: unset; cursor: zoom-in; }
+.zoom-out.vertical #output svg { max-width: 100%; }
+.zoom-out.horizontal #output svg { max-height: 100%; }
+
+@media print {
+
+#toolbar, textarea { display: none; }
+.vertical output, .horizontal #output { width: 100%; height: 100%; margin-left: 0; }
+
+}
