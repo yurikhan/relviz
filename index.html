@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRelViz</title>
+    <link rel="stylesheet" type="text/css" href="assets/styles.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/webrelviz.js"></script>
+</head>
+<body class="horizontal">
+    <form action="render" method="post">
+        <div id="toolbar">
+            <button type="submit" title="Ctrl+Enter">Preview</button>
+            <label for="layout-horizontal"><u>H</u>orizontal</label
+            ><input type="radio" name="_layout" value="horizontal" id="layout-horizontal" accesskey="h" checked
+            ><input type="radio" name="_layout" value="vertical" id="layout-vertical" accesskey="v"
+            ><label for="layout-vertical"><u>V</u>ertical</label>
+            <label for="processor">Processor:</label>
+            <select required name="processor" id="processor">
+                <option value="dot">dot</option>
+                <option value="fdp">fdp</option>
+            </select>
+        </div>
+        <div id="main">
+            <textarea name="facts"></textarea>
+            <div id="output"></div>
+        </div>
+    </form>
+</body>
+</html>
